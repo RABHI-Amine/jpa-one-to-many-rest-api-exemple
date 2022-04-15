@@ -9,4 +9,5 @@ public interface ItemService {
      List<Item> getItems();
      Item getItem(Long id);
      Item deleteItem(Long id);
+     Item updateItem(Long id,Item item);
 }
