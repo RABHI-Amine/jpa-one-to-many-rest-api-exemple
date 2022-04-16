@@ -6,6 +6,7 @@ import com.tutorial.onetomanyjpa.exception.CardNotFoundException;
 import com.tutorial.onetomanyjpa.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class CardServiceImp implements CardService {
     }
 
     @Override
+    @Transactional
     public Card addItemToCard(Long cardId, Long itemId) {
         Card card = getCard(cardId);
         Item item = itemService.getItem(itemId);
@@ -58,10 +60,11 @@ public class CardServiceImp implements CardService {
     }
 
     @Override
+    @Transactional
     public Card removeItemFromCard(Long cardId, Long itemId) {
         Card card = getCard(cardId);
         Item item = itemService.getItem(itemId);
-
+        card.getItems().remove(item);
         return card;
     }
 }
